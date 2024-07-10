@@ -172,7 +172,9 @@ if(PHYSFS_BUILD_STATIC)
     #  library named "physfs.lib" which would conflict; Unix tend to like the
     #  same library name with a different extension for static libs, but
     #  Windows can just have a separate name.
-    if(NOT MSVC)
+	
+	# -- 10/07/2024 (cstow99): Fixed error with Ninja when compiling on CMake (Windows and Clang)
+    if(NOT MSVC AND NOT WIN32)
         set_target_properties(physfs-static PROPERTIES OUTPUT_NAME "physfs")
     endif()
     if(WINRT)
